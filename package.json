@@ -1,10 +1,19 @@
 {
-  "name": "image-build-node",
-  "version": "1.0.0",
+  "name": "build-node11",
+  "org": "garagecatalyst",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./scripts/build.sh $npm_package_name $npm_package_version",
+    "pretest": "npm run build",
+    "test": "npm run test:only",
+    "test:only": "./scripts/test.sh $npm_package_name $npm_package_version",
+    "prepush": "npm test",
+    "push": "npm run push:only",
+    "push:only": "./scripts/publish.sh $npm_package_org $npm_package_name $npm_package_version",
+    "pull": "./scripts/pull.sh $npm_package_org $npm_package_name $npm_package_version",
+    "start": "docker run -it $npm_package_name:$npm_package_version"
   },
   "keywords": [],
   "author": "",
