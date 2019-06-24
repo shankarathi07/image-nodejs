@@ -24,3 +24,12 @@ USER devops
 WORKDIR ${HOME}
 
 RUN curl -sL https://ibm.biz/idt-installer | bash
+
+COPY src/npm-bashrc ${HOME}/.npm-bashrc
+
+RUN mkdir "${HOME}/.npm-packages" && \
+    echo "prefix=${HOME}/.npm-packages" >> ${HOME}/.npmrc && \
+    cat ${HOME}/.npm-bashrc >> ${HOME}/.bashrc && \
+    cat ${HOME}/.npm-bashrc >> ${HOME}/.zshrc
+
+ENTRYPOINT /bin/bash
