@@ -29,7 +29,9 @@ WORKDIR ${HOME}
 COPY src/npm-bashrc ${HOME}/.npm-bashrc
 
 RUN mkdir "${HOME}/.npm-packages" && \
+    chmod g+w "${HOME}/.npm-packages" && \
     mkdir "${HOME}/.npm" && \
+    chmod g+w "${HOME}/.npm" && \
     echo "prefix=${HOME}/.npm-packages" >> ${HOME}/.npmrc && \
     cat ${HOME}/.npm-bashrc >> ${HOME}/.bashrc && \
     cat ${HOME}/.npm-bashrc >> ${HOME}/.zshrc
