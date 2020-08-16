@@ -21,7 +21,8 @@ ENV HOME /home/devops
 # Create devops user
 RUN groupadd --force sudo && \
     useradd -u 10000 -g 0 -G sudo -d ${HOME} -m devops && \
-    usermod --password $(echo password | openssl passwd -1 -stdin) devops
+    usermod --password $(echo password | openssl passwd -1 -stdin) devops && \
+    chmod g+wx -R ${HOME}
 
 USER devops
 WORKDIR ${HOME}
