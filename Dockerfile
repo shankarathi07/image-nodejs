@@ -1,4 +1,4 @@
-FROM ppc64le/node
+FROM ppc64le/node:buster-slim
 
 RUN apt-get update && \
     apt-get install -y sudo && \
