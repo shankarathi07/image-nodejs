@@ -1,4 +1,4 @@
-FROM node:12-stretch-slim
+FROM ppc64le/node
 
 RUN apt-get update && \
     apt-get install -y sudo && \
