@@ -1,18 +1,26 @@
-FROM node:12-stretch-slim
+FROM ppc64le/node
 
-RUN apt-get update && \
-    apt-get install -y sudo && \
-    apt-get install -y openssl && \
-    apt-get install -y curl && \
-    apt-get install -y gnupg
+RUN apk add --update-cache --update \
+  curl \
+  unzip \
+  sudo \
+  shadow \
+  bash \
+  openssl \
+  alpine-sdk \
+  python3 \
+  skopeo \
+  gnupg \
+  ca-certificates \
+  && rm -rf /var/cache/apk/*
 
-RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list
-RUN curl -O https://dl-ssl.google.com/linux/linux_signing_key.pub
-RUN apt-key add linux_signing_key.pub
-RUN rm linux_signing_key.pub
+# RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list
+# RUN curl -O https://dl-ssl.google.com/linux/linux_signing_key.pub
+# RUN apt-key add linux_signing_key.pub
+# RUN rm linux_signing_key.pub
 
-RUN apt-get update && \
-    apt-get install -y google-chrome-stable
+# RUN apt-get update && \
+#    apt-get install -y google-chrome-stable
 
 RUN chmod u+w /etc/sudoers && echo "%sudo   ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
